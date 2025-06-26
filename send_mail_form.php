@@ -1,12 +1,16 @@
 <?php
 require 'vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, 'credintials.env');
+$dotenv->load();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // SMTP credentials
-$gmailUsername = 'raffunseljake.torrejas@gmail.com';
-$gmailAppPassword = 'qvfd ibzv yhme eajt';
+$gmailUsername = $_ENV['GMAIL_USERNAME'];
+$gmailAppPassword = $_ENV['GMAIL_APP_PASSWORD'];
+
 
 // Initialize variables
 $success = '';
@@ -47,22 +51,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Send Email via Gmail SMTP</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; }
-        .container { max-width: 500px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        h2 { text-align: center; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="email"], input[type="text"], textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: #4285f4; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #357ae8; }
-        .success { color: green; text-align: center; margin-bottom: 15px; }
-        .error { color: red; text-align: center; margin-bottom: 15px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #4285f4;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #357ae8;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Send Email via Gmail SMTP</h2>
@@ -89,4 +145,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
-</html> 
+
+</html>
